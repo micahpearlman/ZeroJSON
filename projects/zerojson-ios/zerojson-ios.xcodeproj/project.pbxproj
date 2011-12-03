@@ -1,0 +1,257 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FAC1E4D31489AA0A00C4BFF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC1E4D21489AA0A00C4BFF5 /* Foundation.framework */; };
+		FAC1E4E21489AA2E00C4BFF5 /* zoJSON.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAC1E4E01489AA2E00C4BFF5 /* zoJSON.cpp */; };
+		FAC1E4E31489AA2E00C4BFF5 /* zoJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = FAC1E4E11489AA2E00C4BFF5 /* zoJSON.h */; };
+		FAC1E4E51489AC9900C4BFF5 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC1E4E41489AC9900C4BFF5 /* boost.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FAC1E4CF1489AA0A00C4BFF5 /* libzerojson-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libzerojson-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAC1E4D21489AA0A00C4BFF5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FAC1E4D61489AA0A00C4BFF5 /* zerojson-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zerojson-ios-Prefix.pch"; sourceTree = "<group>"; };
+		FAC1E4E01489AA2E00C4BFF5 /* zoJSON.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zoJSON.cpp; sourceTree = "<group>"; };
+		FAC1E4E11489AA2E00C4BFF5 /* zoJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zoJSON.h; sourceTree = "<group>"; };
+		FAC1E4E41489AC9900C4BFF5 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = ../../thirdparty/boost.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FAC1E4CC1489AA0A00C4BFF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC1E4E51489AC9900C4BFF5 /* boost.framework in Frameworks */,
+				FAC1E4D31489AA0A00C4BFF5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FAC1E4C41489AA0A00C4BFF5 = {
+			isa = PBXGroup;
+			children = (
+				FAC1E4E41489AC9900C4BFF5 /* boost.framework */,
+				FAC1E4D41489AA0A00C4BFF5 /* zerojson-ios */,
+				FAC1E4D11489AA0A00C4BFF5 /* Frameworks */,
+				FAC1E4D01489AA0A00C4BFF5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FAC1E4D01489AA0A00C4BFF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1E4CF1489AA0A00C4BFF5 /* libzerojson-ios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FAC1E4D11489AA0A00C4BFF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1E4D21489AA0A00C4BFF5 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAC1E4D41489AA0A00C4BFF5 /* zerojson-ios */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1E4DF1489AA2E00C4BFF5 /* src */,
+				FAC1E4D51489AA0A00C4BFF5 /* Supporting Files */,
+			);
+			path = "zerojson-ios";
+			sourceTree = "<group>";
+		};
+		FAC1E4D51489AA0A00C4BFF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1E4D61489AA0A00C4BFF5 /* zerojson-ios-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FAC1E4DF1489AA2E00C4BFF5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FAC1E4E01489AA2E00C4BFF5 /* zoJSON.cpp */,
+				FAC1E4E11489AA2E00C4BFF5 /* zoJSON.h */,
+			);
+			name = src;
+			path = ../../../src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FAC1E4CD1489AA0A00C4BFF5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC1E4E31489AA2E00C4BFF5 /* zoJSON.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FAC1E4CE1489AA0A00C4BFF5 /* zerojson-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAC1E4DC1489AA0A00C4BFF5 /* Build configuration list for PBXNativeTarget "zerojson-ios" */;
+			buildPhases = (
+				FAC1E4CB1489AA0A00C4BFF5 /* Sources */,
+				FAC1E4CC1489AA0A00C4BFF5 /* Frameworks */,
+				FAC1E4CD1489AA0A00C4BFF5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "zerojson-ios";
+			productName = "zerojson-ios";
+			productReference = FAC1E4CF1489AA0A00C4BFF5 /* libzerojson-ios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FAC1E4C61489AA0A00C4BFF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Zero Vision";
+			};
+			buildConfigurationList = FAC1E4C91489AA0A00C4BFF5 /* Build configuration list for PBXProject "zerojson-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FAC1E4C41489AA0A00C4BFF5;
+			productRefGroup = FAC1E4D01489AA0A00C4BFF5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAC1E4CE1489AA0A00C4BFF5 /* zerojson-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FAC1E4CB1489AA0A00C4BFF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC1E4E21489AA2E00C4BFF5 /* zoJSON.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FAC1E4DA1489AA0A00C4BFF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FAC1E4DB1489AA0A00C4BFF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FAC1E4DD1489AA0A00C4BFF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/zerojson_ios.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../thirdparty\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "zerojson-ios/zerojson-ios-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FAC1E4DE1489AA0A00C4BFF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/zerojson_ios.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../thirdparty\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "zerojson-ios/zerojson-ios-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FAC1E4C91489AA0A00C4BFF5 /* Build configuration list for PBXProject "zerojson-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAC1E4DA1489AA0A00C4BFF5 /* Debug */,
+				FAC1E4DB1489AA0A00C4BFF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAC1E4DC1489AA0A00C4BFF5 /* Build configuration list for PBXNativeTarget "zerojson-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAC1E4DD1489AA0A00C4BFF5 /* Debug */,
+				FAC1E4DE1489AA0A00C4BFF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FAC1E4C61489AA0A00C4BFF5 /* Project object */;
+}
