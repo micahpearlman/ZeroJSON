@@ -62,8 +62,9 @@ namespace zo {
 		static bool parse(std::istream& input, Value& value);
 		
 		template<typename T> bool is() const;
-		template<typename T> T& get();
-		template<typename T> const T& get() const;
+		
+		template<typename T> T get() const;
+		template<typename T> T get();
 
 		Value(const Value& o ) {
 			_value = o._value;
@@ -92,6 +93,8 @@ namespace zo {
 		void describe() const;
 		
 	private:
+		
+		template<typename T> T& _get();
 		
 		
 		enum {
@@ -277,74 +280,143 @@ namespace zo {
 	inline bool Value::is<Object>() const {
 	  return _type == kTypeObject;
 	}
+	
+	/////////////////
 
 	template<>
-	inline bool& Value::get<bool>() {
+	inline bool& Value::_get<bool>() {
 		assert(is<bool>());
 		bool* b = boost::any_cast<bool>(&_value);
 		return *b;
 	}
 
 	template<>
-	inline std::string& Value::get<std::string>() {
+	inline std::string& Value::_get<std::string>() {
 		assert(is<std::string>());
 		std::string* s = boost::any_cast<std::string>(&_value);
 		return *s;
 	}
 
 	template<>
-	inline double& Value::get<double>() {
+	inline double& Value::_get<double>() {
 		assert(is<double>());
 		double* d = boost::any_cast<double>(&_value);
 		return *d;
 	}
-
+	
 
 	template<>
-	inline Array& Value::get<Array>() {
+	inline Array& Value::_get<Array>() {
 		assert(is<Array>());
 		Array* a = boost::any_cast<Array>(&_value);
 		return *a;
 	}
 
 	template<>
-	inline Object& Value::get<Object>() {
+	inline Object& Value::_get<Object>() {
 		assert(is<Object>());
 		Object* o = boost::any_cast<Object>(&_value);
 		return *o;
 	}
 
 	template<>
-	inline const bool& Value::get<bool>() const {
+	inline bool Value::get<bool>() const {
 		assert(is<bool>());
 		const bool* b = boost::any_cast<bool>(&_value); 
 		return *b;
 	}
 
 	template<>
-	inline const std::string& Value::get<std::string>() const {
+	inline bool Value::get<bool>() {
+		assert(is<bool>());
+		bool* b = boost::any_cast<bool>(&_value);
+		return *b;
+	}
+	
+	template<>
+	inline std::string Value::get<std::string>() {
+		assert(is<std::string>());
+		std::string* s = boost::any_cast<std::string>(&_value);
+		return *s;
+	}
+	
+	template<>
+	inline double Value::get<double>() {
+		assert(is<double>());
+		double* d = boost::any_cast<double>(&_value);
+		return *d;
+	}
+	
+	template<>
+	inline int Value::get<int>() {
+		assert(is<double>());
+		double* d = boost::any_cast<double>(&_value);
+		return int(*d);
+	}
+	
+	template<>
+	inline float Value::get<float>() {
+		assert(is<double>());
+		double* d = boost::any_cast<double>(&_value);
+		return float(*d);
+	}
+
+	
+	template<>
+	inline Array Value::get<Array>() {
+		assert(is<Array>());
+		Array* a = boost::any_cast<Array>(&_value);
+		return *a;
+	}
+	
+	template<>
+	inline Object Value::get<Object>() {
+		assert(is<Object>());
+		Object* o = boost::any_cast<Object>(&_value);
+		return *o;
+	}
+	
+	///////////////////
+
+	template<>
+	inline std::string Value::get<std::string>() const {
 	  assert(is<std::string>());
 		const std::string* s = boost::any_cast<std::string>(&_value);
 		return *s;
 	}
 
 	template<>
-	inline const double& Value::get<double>() const {
+	inline double Value::get<double>() const {
 		assert(is<double>());
 		const double* d = boost::any_cast<double>(&_value);
 		return *d;
 	}
 
+	template<>
+	inline int Value::get<int>() const {
+		assert(is<double>());
+		const double* d = boost::any_cast<double>(&_value);
+		int i = int(*d);
+		return i;
+	}
 
 	template<>
-	inline const Array& Value::get<Array>() const {
+	inline float Value::get<float>() const {
+		assert(is<double>());
+		const double* d = boost::any_cast<double>(&_value);
+		float i = float(*d);
+		return i;
+	}
+
+	template<>
+	inline Array Value::get<Array>() const {
 		assert(is<Array>());
 		const Array* a = boost::any_cast<Array>(&_value);
 		return *a;
 	}
 
 	template<>
-	inline const Object& Value::get<Object>() const {
+	inline Object Value::get<Object>() const {
 		assert(is<Object>());
 		const Object* o = boost::any_cast<Object>(&_value);
 		return *o;
