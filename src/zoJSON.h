@@ -77,14 +77,14 @@ namespace zo {
 			return *this;
 		}
 		
-		Value& operator[]( int i ); 
-		const Value& operator[]( int i ) const; 
+		Value operator[]( int i ); 
+		const Value operator[]( int i ) const; 
 		
-		Value& operator[]( const char* k );
-		const Value& operator[]( const char* k ) const;
+		Value operator[]( const char* k );
+		const Value operator[]( const char* k ) const;
 		
-		Value& operator[]( const std::string& k );
-		const Value& operator[]( const std::string& k ) const;
+		Value operator[]( const std::string& k );
+		const Value operator[]( const std::string& k ) const;
 		
 		inline bool has( const std::string& key ) const;
 		
@@ -131,15 +131,21 @@ namespace zo {
 			_value_map[key] = Value( v );
 		}
 
-		const Value& value(const std::string& key) const {return _value_map.find(key)->second;}	
-		Value& value(const std::string& key) {return _value_map.find(key)->second;}	
+		const Value& value(const std::string& key) const {
+			const Value& v = _value_map.find(key)->second;
+			return v;
+		}	
+		Value& value(const std::string& key) { 
+			Value& v = _value_map.find(key)->second;
+			return v;
+		}	
 
 		const std::map<std::string, Value>& kv_map() const { return _value_map; }
 		
 		Object( const Object& o ) { _value_map = o._value_map; }
 		Object& operator=( const Object& o ) { _value_map = o._value_map; return *this; }
 		
-		Value& operator[]( const std::string& k ) { 
+		Value operator[]( const std::string& k ) { 
 			std::map<std::string, Value>::iterator it = _value_map.find(k);
 			if ( it != _value_map.end() ) {
 				return it->second;
@@ -149,7 +155,7 @@ namespace zo {
 			it = _value_map.find(k);
 			return it->second; 
 		}
-		const Value& operator[]( const std::string& k ) const { return value(k); }
+		const Value operator[]( const std::string& k ) const { return value(k); }
 
 		
 		void describe() const;
@@ -173,8 +179,8 @@ namespace zo {
 
 		template <typename T> T& get(unsigned int i);
 		template <typename T> const T& get(unsigned int i) const;
-		const Value& operator[]( int i ) const { return value( i ); }
-		Value& operator[]( int i ) { return value( i ); }
+		const Value operator[]( int i ) const { return value( i ); }
+		Value operator[]( int i ) { return value( i ); }
 
 		const Value& value( unsigned int i ) const { return _values[i]; }
 		Value& value( unsigned int i ) {
@@ -318,129 +324,119 @@ namespace zo {
 		Object* o = boost::any_cast<Object>(&_value);
 		return *o;
 	}
+	
+	
+	//////////////////////
 
 	template<>
 	inline bool Value::get<bool>() const {
 		assert(is<bool>());
-		const bool* b = boost::any_cast<bool>(&_value); 
-		return *b;
+		return boost::any_cast<bool>(_value); ;
 	}
 
 	template<>
 	inline bool Value::get<bool>() {
 		assert(is<bool>());
-		bool* b = boost::any_cast<bool>(&_value);
-		return *b;
+		return boost::any_cast<bool>(_value);
 	}
 	
 	template<>
 	inline std::string Value::get<std::string>() {
 		assert(is<std::string>());
-		std::string* s = boost::any_cast<std::string>(&_value);
-		return *s;
+		return boost::any_cast<std::string>(_value);
 	}
 	
 	template<>
 	inline double Value::get<double>() {
 		assert(is<double>());
-		double* d = boost::any_cast<double>(&_value);
-		return *d;
+		return boost::any_cast<double>(_value);
 	}
 	
 	template<>
 	inline int Value::get<int>() {
 		assert(is<double>());
-		double* d = boost::any_cast<double>(&_value);
-		return int(*d);
+		return int(boost::any_cast<double>(_value));
 	}
 	
 	template<>
 	inline float Value::get<float>() {
 		assert(is<double>());
-		double* d = boost::any_cast<double>(&_value);
-		return float(*d);
+		return float(boost::any_cast<double>(_value));
 	}
 
 	
 	template<>
 	inline Array Value::get<Array>() {
 		assert(is<Array>());
-		Array* a = boost::any_cast<Array>(&_value);
-		return *a;
+		return boost::any_cast<Array>(_value);
 	}
 	
 	template<>
 	inline Object Value::get<Object>() {
-		assert(is<Object>());
-		Object* o = boost::any_cast<Object>(&_value);
-		return *o;
+		return boost::any_cast<Object>(_value);;
 	}
 	
 	///////////////////
 
 	template<>
 	inline std::string Value::get<std::string>() const {
-	  assert(is<std::string>());
-		const std::string* s = boost::any_cast<std::string>(&_value);
-		return *s;
+		assert(is<std::string>());
+		return boost::any_cast<std::string>(_value);;
 	}
 
 	template<>
 	inline double Value::get<double>() const {
 		assert(is<double>());
-		const double* d = boost::any_cast<double>(&_value);
-		return *d;
+		return boost::any_cast<double>(_value);;
 	}
 
 	template<>
 	inline int Value::get<int>() const {
 		assert(is<double>());
-		const double* d = boost::any_cast<double>(&_value);
-		int i = int(*d);
-		return i;
+		return int(boost::any_cast<double>(_value));
 	}
 
 	template<>
 	inline float Value::get<float>() const {
 		assert(is<double>());
-		const double* d = boost::any_cast<double>(&_value);
-		float i = float(*d);
-		return i;
+		return float(boost::any_cast<double>(_value));
 	}
 
 	template<>
 	inline Array Value::get<Array>() const {
 		assert(is<Array>());
-		const Array* a = boost::any_cast<Array>(&_value);
-		return *a;
+		return boost::any_cast<Array>(_value);;
 	}
 
 	template<>
 	inline Object Value::get<Object>() const {
 		assert(is<Object>());
-		const Object* o = boost::any_cast<Object>(&_value);
-		return *o;
+		return boost::any_cast<Object>(_value);;
 	}
 
 	
-	inline Value& Value::operator[]( int i ) {
+	inline Value Value::operator[]( int i ) {
 		return get<Array>().value( i );
 	}
-	inline const Value& Value::operator[]( int i ) const {
+	inline const Value Value::operator[]( int i ) const {
 		return get<Array>().value( i );
 	}
 	
-	inline Value& Value::operator[]( const char* k ) {
+	inline Value Value::operator[]( const char* k ) {
+		assert( has(k) );
 		return get<Object>().value( std::string(k) );
 	}
-	inline const Value& Value::operator[]( const char* k ) const {
+	inline const Value Value::operator[]( const char* k ) const {
+		assert( has(k) );
 		return get<Object>().value( std::string(k) );
 	}
 	
-	inline Value& Value::operator[]( const std::string& k ) {
+	inline Value Value::operator[]( const std::string& k ) {
+		assert( has(k) );
 		return get<Object>().value( k );
 	}
-	inline const Value& Value::operator[]( const std::string& k ) const {
+	inline const Value Value::operator[]( const std::string& k ) const {
+		assert( has(k) );
 		return get<Object>().value( k );
 	}
 
