@@ -103,7 +103,7 @@ namespace zo {
 		
 		inline bool has( const std::string& key ) const;
 		
-		Value::Type type() { return _type; }
+		Value::Type type() const { return _type; }
 		
 		void describe() const;
 		
@@ -448,7 +448,8 @@ namespace zo {
 	}
 
 	inline bool Value::has( const std::string& key ) const {
-		return get<Object>().has( key );
+		
+		return type() == kTypeObject && get<Object>().has( key );
 	}
 	
 	inline std::string& operator<<(std::string& s, const zo::Value& v ) {

@@ -110,6 +110,8 @@ Object::~Object() {
 //    for (i = _value_map.begin(); i != _value_map.end(); ++i) {
 //        delete i->second;
 //    }
+//	cout << "######Destory ZeroJSON::Object:" << endl;
+//	describe();
 }
 
 bool Object::parse(std::istream& input, Object& object) {
