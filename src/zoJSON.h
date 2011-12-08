@@ -27,6 +27,16 @@ namespace zo {
 	
 	class Value {
 	public:
+		enum Type {
+			kTypeNumber = 0,
+			kTypeString = 1,
+			kTypeBool = 2,
+			kTypeNull = 3,
+			kTypeArray = 4,
+			kTypeObject = 5,
+			kTypeInvalid = 6
+		};
+		
 		class Null {};
 		
 		Value();
@@ -42,6 +52,11 @@ namespace zo {
 			_value = d;
 			_type = kTypeNumber;
 		}
+		Value( int d ) {
+			_value = double(d);
+			_type = kTypeNumber;
+		}
+
 		Value( bool b ) {
 			_value = b;
 			_type = kTypeBool;
@@ -71,9 +86,9 @@ namespace zo {
 			_type = o._type;
 		}
 		
-		Value& operator=(const Value& o) {
-			_value = o._value;
-			_type = o._type;
+		Value& operator=(const Value& rhs) {
+			_value = rhs._value;
+			_type = rhs._type;
 			return *this;
 		}
 		
@@ -88,7 +103,7 @@ namespace zo {
 		
 		inline bool has( const std::string& key ) const;
 		
-
+		Value::Type type() { return _type; }
 		
 		void describe() const;
 		
@@ -97,15 +112,7 @@ namespace zo {
 		template<typename T> T& _get();
 		
 		
-		enum {
-			kTypeNumber = 0,
-			kTypeString = 1,
-			kTypeBool = 2,
-			kTypeNull = 3,
-			kTypeArray = 4,
-			kTypeObject = 5,
-			kTypeInvalid = 6
-		} _type;
+		Type _type;
 		
 		boost::any		_value;
 	};
@@ -336,7 +343,7 @@ namespace zo {
 
 	template<>
 	inline bool Value::get<bool>() {
-		assert(is<bool>());
+		assert(is<bool>() || type() == kTypeNumber );
 		return boost::any_cast<bool>(_value);
 	}
 	
