@@ -92,13 +92,13 @@ namespace zo {
 			return *this;
 		}
 		
-		Value operator[]( int i ); 
+		Value& operator[]( int i ); 
 		const Value operator[]( int i ) const; 
 		
-		Value operator[]( const char* k );
+		Value& operator[]( const char* k );
 		const Value operator[]( const char* k ) const;
 		
-		Value operator[]( const std::string& k );
+		Value& operator[]( const std::string& k );
 		const Value operator[]( const std::string& k ) const;
 		
 		inline bool has( const std::string& key ) const;
@@ -422,25 +422,25 @@ namespace zo {
 	}
 
 	
-	inline Value Value::operator[]( int i ) {
-		return get<Array>().value( i );
+	inline Value& Value::operator[]( int i ) {
+		return _get<Array>().value( i );
 	}
 	inline const Value Value::operator[]( int i ) const {
 		return get<Array>().value( i );
 	}
 	
-	inline Value Value::operator[]( const char* k ) {
+	inline Value& Value::operator[]( const char* k ) {
 		assert( has(k) );
-		return get<Object>().value( std::string(k) );
+		return _get<Object>().value( std::string(k) );
 	}
 	inline const Value Value::operator[]( const char* k ) const {
 		assert( has(k) );
 		return get<Object>().value( std::string(k) );
 	}
 	
-	inline Value Value::operator[]( const std::string& k ) {
+	inline Value& Value::operator[]( const std::string& k ) {
 		assert( has(k) );
-		return get<Object>().value( k );
+		return _get<Object>().value( k );
 	}
 	inline const Value Value::operator[]( const std::string& k ) const {
 		assert( has(k) );
