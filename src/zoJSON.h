@@ -27,6 +27,16 @@ namespace zo {
 	
 	class Value {
 	public:
+		enum Type {
+			kTypeNumber = 0,
+			kTypeString = 1,
+			kTypeBool = 2,
+			kTypeNull = 3,
+			kTypeArray = 4,
+			kTypeObject = 5,
+			kTypeInvalid = 6
+		};
+		
 		class Null {};
 		
 		Value();
@@ -42,6 +52,11 @@ namespace zo {
 			_value = d;
 			_type = kTypeNumber;
 		}
+		Value( int d ) {
+			_value = double(d);
+			_type = kTypeNumber;
+		}
+
 		Value( bool b ) {
 			_value = b;
 			_type = kTypeBool;
@@ -71,24 +86,24 @@ namespace zo {
 			_type = o._type;
 		}
 		
-		Value& operator=(const Value& o) {
-			_value = o._value;
-			_type = o._type;
+		Value& operator=(const Value& rhs) {
+			_value = rhs._value;
+			_type = rhs._type;
 			return *this;
 		}
 		
-		Value operator[]( int i ); 
+		Value& operator[]( int i ); 
 		const Value operator[]( int i ) const; 
 		
-		Value operator[]( const char* k );
+		Value& operator[]( const char* k );
 		const Value operator[]( const char* k ) const;
 		
-		Value operator[]( const std::string& k );
+		Value& operator[]( const std::string& k );
 		const Value operator[]( const std::string& k ) const;
 		
 		inline bool has( const std::string& key ) const;
 		
-
+		Value::Type type() const { return _type; }
 		
 		void describe() const;
 		
@@ -97,15 +112,7 @@ namespace zo {
 		template<typename T> T& _get();
 		
 		
-		enum {
-			kTypeNumber = 0,
-			kTypeString = 1,
-			kTypeBool = 2,
-			kTypeNull = 3,
-			kTypeArray = 4,
-			kTypeObject = 5,
-			kTypeInvalid = 6
-		} _type;
+		Type _type;
 		
 		boost::any		_value;
 	};
@@ -336,7 +343,7 @@ namespace zo {
 
 	template<>
 	inline bool Value::get<bool>() {
-		assert(is<bool>());
+		assert(is<bool>() || type() == kTypeNumber );
 		return boost::any_cast<bool>(_value);
 	}
 	
@@ -415,25 +422,25 @@ namespace zo {
 	}
 
 	
-	inline Value Value::operator[]( int i ) {
-		return get<Array>().value( i );
+	inline Value& Value::operator[]( int i ) {
+		return _get<Array>().value( i );
 	}
 	inline const Value Value::operator[]( int i ) const {
 		return get<Array>().value( i );
 	}
 	
-	inline Value Value::operator[]( const char* k ) {
+	inline Value& Value::operator[]( const char* k ) {
 		assert( has(k) );
-		return get<Object>().value( std::string(k) );
+		return _get<Object>().value( std::string(k) );
 	}
 	inline const Value Value::operator[]( const char* k ) const {
 		assert( has(k) );
 		return get<Object>().value( std::string(k) );
 	}
 	
-	inline Value Value::operator[]( const std::string& k ) {
+	inline Value& Value::operator[]( const std::string& k ) {
 		assert( has(k) );
-		return get<Object>().value( k );
+		return _get<Object>().value( k );
 	}
 	inline const Value Value::operator[]( const std::string& k ) const {
 		assert( has(k) );
@@ -441,7 +448,8 @@ namespace zo {
 	}
 
 	inline bool Value::has( const std::string& key ) const {
-		return get<Object>().has( key );
+		
+		return type() == kTypeObject && get<Object>().has( key );
 	}
 	
 	inline std::string& operator<<(std::string& s, const zo::Value& v ) {
