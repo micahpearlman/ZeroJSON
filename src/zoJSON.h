@@ -173,7 +173,7 @@ namespace zo {
 
 		static bool parse(std::istream& input, Array& array);
 
-		unsigned int size() const { return _values.size(); }
+		unsigned  long size() const { return _values.size(); }
 
 		template <typename T> bool has(unsigned int i) const;
 
@@ -194,7 +194,7 @@ namespace zo {
 		}
 		
 		void reserve( int sz ) {
-			for( int i = size(); i < sz; i++ ) {
+			for( long i = size(); i < sz; i++ ) {
 				_values.push_back( Value() );
 			}
 		}

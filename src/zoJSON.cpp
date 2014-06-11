@@ -29,7 +29,7 @@ bool parse_string(std::istream& input, std::string* value) {
     if (!match("\"", input))  {
         return false;
     }
-    char ch;
+    char ch = -1;
     while(!input.eof() && input.good()) {
         input.get(ch);
         if (ch == '"') {
@@ -75,6 +75,7 @@ bool parse_string(std::istream& input, std::string* value) {
 }
 
 bool parse_bool(std::istream& input, bool* value) {
+	
     if (match("true", input))  {
         *value = true;
         return true;
@@ -164,6 +165,12 @@ bool Value::parse(std::istream& input, Value& value) {
         value._type = kTypeString;
         return true;
     }
+	bool bool_value;
+    if (parse_bool(input, &bool_value)) {
+		value._value = bool_value;
+        value._type = kTypeBool;
+        return true;
+    }
 	double double_value;
     if (parse_number(input, &double_value)) {
 		value._value = double_value;
@@ -171,12 +178,6 @@ bool Value::parse(std::istream& input, Value& value) {
         return true;
     }
 
-	bool bool_value;
-    if (parse_bool(input, &bool_value)) {
-		value._value = bool_value;
-        value._type = kTypeBool;
-        return true;
-    }
     if (parse_null(input)) {
         value._type = kTypeNull;
         return true;
